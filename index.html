@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Watch.is</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/kbd.css" />
+    <link rel="stylesheet" href="styles/player.css" />
+    <script src="scripts/dbg.js"></script>
+    <script type='text/javascript' language='javascript' src='$MANAGER_WIDGET/Common/API/Widget.js'></script>
+    <script type='text/javascript' language='javascript' src='$MANAGER_WIDGET/Common/API/TVKeyValue.js'></script>
+    <script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/webapi/1.0/webapis.js"></script>
+    <script src="scripts/settings.js"></script>
+    <script src="scripts/player.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/kbd.js"></script>
+    <script src="scripts/watchis.js"></script>
+    <script src="scripts/grid.js"></script>
+    <script src="scripts/main.js"></script>
+</head>
+<body onload="Main.onLoadCB();" onunload="Main.onUnloadCB()">
+    <header id="header">
+        <div id="header_content_wrapper">
+            <div class="header-content-cell">
+                <button id="search_button" class="header-button"><span>ПОИСК</span></button>
+            </div>
+            <div class="header-content-cell rubber-w">
+                <div id="header_placeholder">
+                    <span id="title_placeholder">&nbsp;</span>
+                    <input id="search_input" />
+                </div>
+            </div>
+            <div class="header-content-cell">
+                <button id="settings_button" class="header-button"><span>НАСТРОЙКИ</span></button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="main_content_wrapper">
+            <nav id="main_content_nav">
+                <button class="nav-cell nav-button" id="catalog_button" data-section="catalog">ВСЕ</button>
+                <button class="nav-cell nav-button" id="genre_button" data-section="genre">ЖАНР</button>
+                <button class="nav-cell nav-button confirm-button" id="filter_sort_apply_btn" data-section="spinner">ПРИМЕНИТЬ ФИЛЬТРЫ</button>
+                <span class="nav-cell" id="message_box"></span>
+            </nav>
+            <section id="main_content">
+                <div class="pager-btn-wrapper"><button class="pager-btn" id="page_prev_btn"><span>&lt;</span></button></div>
+                <div id="grid_container"></div>
+                <div class="pager-btn-wrapper"><button class="pager-btn" id="page_next_btn"><span>&gt;</span></button></div>
+            </section>
+        </div>
+    </main>
+    <footer id="footer">&nbsp;</footer>
+<div id="kbd" class="kbd-panel">
+    <div id="kbd_search_ru" class="local-kbd">
+        <div class="kbd-row">
+            <div class="kbd-key" data-key="ё">ё</div>
+            <div class="kbd-key" data-key="1">1</div>
+            <div class="kbd-key" data-key="2">2</div>
+            <div class="kbd-key" data-key="3">3</div>
+            <div class="kbd-key" data-key="4">4</div>
+            <div class="kbd-key" data-key="5">5</div>
+            <div class="kbd-key" data-key="6">6</div>
+            <div class="kbd-key" data-key="7">7</div>
+            <div class="kbd-key" data-key="8">8</div>
+            <div class="kbd-key" data-key="9">9</div>
+            <div class="kbd-key" data-key="0">0</div>
+            <div class="kbd-key kbd-key-del">DEL</div>
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key" data-key="й">й</div>
+            <div class="kbd-key" data-key="ц">ц</div>
+            <div class="kbd-key" data-key="у">у</div>
+            <div class="kbd-key" data-key="к">к</div>
+            <div class="kbd-key" data-key="е">е</div>
+            <div class="kbd-key" data-key="н">н</div>
+            <div class="kbd-key" data-key="г">г</div>
+            <div class="kbd-key" data-key="ш">ш</div>
+            <div class="kbd-key" data-key="щ">щ</div>
+            <div class="kbd-key" data-key="з">з</div>
+            <div class="kbd-key" data-key="х">х</div>
+            <div class="kbd-key" data-key="ъ">ъ</div>
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key" data-key="ф">ф</div>
+            <div class="kbd-key" data-key="ы">ы</div>
+            <div class="kbd-key" data-key="в">в</div>
+            <div class="kbd-key" data-key="а">а</div>
+            <div class="kbd-key" data-key="п">п</div>
+            <div class="kbd-key" data-key="р">р</div>
+            <div class="kbd-key" data-key="о">о</div>
+            <div class="kbd-key" data-key="л">л</div>
+            <div class="kbd-key" data-key="д">д</div>
+            <div class="kbd-key" data-key="ж">ж</div>
+            <div class="kbd-key" data-key="э">э</div>
+            <div class="kbd-key" data-key=".">.</div>
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key kbd-key-shift">SHIFT</div>
+            <div class="kbd-key" data-key="я">я</div>
+            <div class="kbd-key" data-key="ч">ч</div>
+            <div class="kbd-key" data-key="с">с</div>
+            <div class="kbd-key" data-key="м">м</div>
+            <div class="kbd-key" data-key="и">и</div>
+            <div class="kbd-key" data-key="т">т</div>
+            <div class="kbd-key" data-key="ь">ь</div>
+            <div class="kbd-key" data-key="б">б</div>
+            <div class="kbd-key" data-key="ю">ю</div>
+            <div class="kbd-key" data-key=",">,</div>
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key kbd-key-lang-switch" data-handler="LayoutSwitch" data-to-layout="en">en</div>
+            <div class="kbd-key kbd-key-space" data-key=" ">&nbsp;</div>
+            <div class="kbd-key kbd-key-ok">OK</div>
+        </div>
+    </div>
+    <div id="kbd_search_en" class="local-kbd">
+        <div class="kbd-row">
+            <div class="kbd-key" data-key="1">1</div>
+            <div class="kbd-key" data-key="2">2</div>
+            <div class="kbd-key" data-key="3">3</div>
+            <div class="kbd-key" data-key="4">4</div>
+            <div class="kbd-key" data-key="5">5</div>
+            <div class="kbd-key" data-key="6">6</div>
+            <div class="kbd-key" data-key="7">7</div>
+            <div class="kbd-key" data-key="8">8</div>
+            <div class="kbd-key" data-key="9">9</div>
+            <div class="kbd-key" data-key="0">0</div>
+            <div class="kbd-key kbd-key-del">DEL</div>
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key" data-key="q">q</div>
+            <div class="kbd-key" data-key="w">w</div>
+            <div class="kbd-key" data-key="e">e</div>
+            <div class="kbd-key" data-key="r">r</div>
+            <div class="kbd-key" data-key="t">t</div>
+            <div class="kbd-key" data-key="y">y</div>
+            <div class="kbd-key" data-key="u">u</div>
+            <div class="kbd-key" data-key="i">i</div>
+            <div class="kbd-key" data-key="o">o</div>
+            <div class="kbd-key" data-key="p">p</div>
+
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key" data-key="a">a</div>
+            <div class="kbd-key" data-key="s">s</div>
+            <div class="kbd-key" data-key="d">d</div>
+            <div class="kbd-key" data-key="f">f</div>
+            <div class="kbd-key" data-key="g">g</div>
+            <div class="kbd-key" data-key="h">h</div>
+            <div class="kbd-key" data-key="j">j</div>
+            <div class="kbd-key" data-key="k">k</div>
+            <div class="kbd-key" data-key="l">l</div>
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key kbd-key-shift">SHIFT</div>
+            <div class="kbd-key" data-key="z">z</div>
+            <div class="kbd-key" data-key="x">x</div>
+            <div class="kbd-key" data-key="c">c</div>
+            <div class="kbd-key" data-key="v">v</div>
+            <div class="kbd-key" data-key="b">b</div>
+            <div class="kbd-key" data-key="n">n</div>
+            <div class="kbd-key" data-key="m">m</div>
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key kbd-key-lang-switch" data-handler="LayoutSwitch" data-to-layout="symbols">symbols</div>
+            <div class="kbd-key kbd-key-space" data-key=" ">&nbsp;</div>
+            <div class="kbd-key kbd-key-ok">OK</div>
+        </div>
+    </div>
+    <div id="kbd_search_symbols" class="local-kbd">
+        <div class="kbd-row">
+            <div class="kbd-key" data-key="1">1</div>
+            <div class="kbd-key" data-key="2">2</div>
+            <div class="kbd-key" data-key="3">3</div>
+            <div class="kbd-key" data-key="4">4</div>
+            <div class="kbd-key" data-key="5">5</div>
+            <div class="kbd-key" data-key="6">6</div>
+            <div class="kbd-key" data-key="7">7</div>
+            <div class="kbd-key" data-key="8">8</div>
+            <div class="kbd-key" data-key="9">9</div>
+            <div class="kbd-key" data-key="0">0</div>
+            <div class="kbd-key kbd-key-del">DEL</div>
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key" data-key="!">!</div>
+            <div class="kbd-key" data-key="@">@</div>
+            <div class="kbd-key" data-key="#">#</div>
+            <div class="kbd-key" data-key="%">%</div>
+            <div class="kbd-key" data-key="^">^</div>
+            <div class="kbd-key" data-key="&">&</div>
+            <div class="kbd-key" data-key="*">*</div>
+            <div class="kbd-key" data-key="(">(</div>
+            <div class="kbd-key" data-key=")">)</div>
+            <div class="kbd-key" data-key="-">-</div>
+
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key" data-key="[">[</div>
+            <div class="kbd-key" data-key="]">]</div>
+            <div class="kbd-key" data-key="{">{</div>
+            <div class="kbd-key" data-key="}">}</div>
+            <div class="kbd-key" data-key=";">;</div>
+            <div class="kbd-key" data-key=":">:</div>
+            <div class="kbd-key" data-key="'">'</div>
+            <div class="kbd-key" data-key='"'>"</div>
+            <div class="kbd-key" data-key=",">,</div>
+
+
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key kbd-key-shift">SHIFT</div>
+            <div class="kbd-key" data-key="z">z</div>
+            <div class="kbd-key" data-key="x">x</div>
+            <div class="kbd-key" data-key="c">c</div>
+            <div class="kbd-key" data-key="v">v</div>
+            <div class="kbd-key" data-key="b">b</div>
+            <div class="kbd-key" data-key="n">n</div>
+            <div class="kbd-key" data-key="m">m</div>
+
+
+
+        </div>
+        <div class="kbd-row">
+            <div class="kbd-key kbd-key-lang-switch" data-handler="LayoutSwitch" data-to-layout="ru">ru</div>
+            <div class="kbd-key kbd-key-space" data-key=" ">&nbsp;</div>
+            <div class="kbd-key kbd-key-ok">OK</div>
+        </div>
+    </div>
+
+</div>
+<div id="tint_overlay">
+    <div id="tint_container">
+        <div id="spinner">Загружаем...</div>
+
+        <section id="tint_catalog_chooser" class="tint-section">
+            <table class="tint-table">
+                <tr>
+                    <td width="50%">
+                        <button class="tint-button" data-val="all" data-val-ru="ВСЕ" data-section="catalog">ВСЕ</button>
+                    </td>
+                    <td width="50%">
+                        <button class="tint-button" data-val="top" data-val-ru="ЛУЧШИЕ" data-section="catalog">ЛУЧШИЕ</button>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="tint_genre_chooser" class="tint-section">
+            <table class="tint-table">
+                <tr>
+                    <td colspan="3"><button class="tint-button" data-val="0" data-val-ru="Все" data-section="genre">Все</button></td>
+                    <td><button class="tint-button" data-val="1" data-val-ru="Комедия" data-section="genre">Комедия</button></td>
+                    <td><button class="tint-button" data-val="2" data-val-ru="Боевик" data-section="genre">Боевик</button></td>
+                </tr>
+                <tr>
+                    <td><button class="tint-button" data-val="3" data-val-ru="Фантастика" data-section="genre">Фантастика</button></td>
+                    <td><button class="tint-button" data-val="4" data-val-ru="Фэнтези" data-section="genre">Фэнтези</button></td>
+                    <td><button class="tint-button" data-val="5" data-val-ru="Мультфильм" data-section="genre">Мультфильм</button></td>
+                    <td><button class="tint-button" data-val="6" data-val-ru="Семейный" data-section="genre">Семейный</button></td>
+                    <td><button class="tint-button" data-val="7" data-val-ru="Триллер" data-section="genre">Триллер</button></td>
+                </tr>
+                <tr>
+                    <td><button class="tint-button" data-val="8" data-val-ru="Приключения" data-section="genre">Приключения</button></td>
+                    <td><button class="tint-button" data-val="9" data-val-ru="Драма" data-section="genre">Драма</button></td>
+                    <td><button class="tint-button" data-val="10" data-val-ru="Мелодрама" data-section="genre">Мелодрама</button></td>
+                    <td><button class="tint-button" data-val="11" data-val-ru="Мистика" data-section="genre">Мистика</button></td>
+                    <td><button class="tint-button" data-val="12" data-val-ru="Детектив" data-section="genre">Детектив</button></td>
+                </tr>
+                <tr>
+                    <td><button class="tint-button" data-val="13" data-val-ru="Ужасы" data-section="genre">Ужасы</button></td>
+                    <td><button class="tint-button" data-val="15" data-val-ru="Вестерн" data-section="genre">Вестерн</button></td>
+                    <td><button class="tint-button" data-val="16" data-val-ru="Военный" data-section="genre">Военный</button></td>
+                    <td><button class="tint-button" data-val="17" data-val-ru="Кастрофа" data-section="genre">Катастрофа</button></td>
+                    <td><button class="tint-button" data-val="18" data-val-ru="Криминал" data-section="genre">Криминал</button></td>
+                </tr>
+                <tr>
+                    <td><button class="tint-button" data-val="19" data-val-ru="Исторический" data-section="genre">Исторический</button></td>
+                    <td><button class="tint-button" data-val="20" data-val-ru="Музыкальный" data-section="genre">Музыкальный</button></td>
+                    <td><button class="tint-button" data-val="21" data-val-ru="Аниме" data-section="genre">Аниме</button></td>
+                    <td><button class="tint-button" data-val="23" data-val-ru="Спорт" data-section="genre">Спорт</button></td>
+                    <td><button class="tint-button" data-val="24" data-val-ru="Эротика" data-section="genre">Эротика</button></td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="tint_info" class="tint-section">
+            <div id="info_columns_wrapper">
+                <div id="info_close"><button class="tint-button">&times;</button></div>
+                <div id=info_left_column>
+                    <div id="video_buttons"></div>
+                    <div id="info_poster" style="background-image: url('http://watch.is/posters/9040.jpg');"></div>
+                </div>
+                <div id="info_right_column">
+                    <div id="info_title_wrapper"><h1 id="info_title"></h1></div>
+                    <ul id="info_details_wrapper">
+                        <li id="info_year"></li>
+                        <li id="info_country"></li>
+                        <li id="info_duration"></li>
+                    </ul>
+                    <div id="info_about_wrapper"><p id="info_about"></p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tint_settings">
+            <label for="username">Логин:<input id="username" /></label>
+            <label for="password">Пароль:<input id="password" type="password"></label>
+            <label for="debug">Режим отладки:<input id="debug" type="checkbox"></label>
+            <button id="settings_save_button" class="tint-button">Сохранить</button>
+        </section>
+    </div>
+</div>
+<div id="player_container"></div>
+<div id="player_overlay_container">
+    <span id="player_overlay_title_info"></span>
+    <span id="player_overlay_time_info"></span>
+</div>
+<div id="debug_overlay">
+    <ul id="debug_ul"></ul>
+</div>
+</body>
+</html>

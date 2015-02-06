@@ -1,0 +1,65 @@
+#kbd {
+    display:none;
+    position: absolute;
+    z-index: 10;
+}
+
+#kbd_search_en, #kbd_search_symbols {
+    display: none;
+}
+
+
+.kbd-panel {
+    background-color: midnightblue;
+    display: table;
+    color: white;
+    font-size: 2em;
+}
+
+.kbd-row {
+    display: table-row;
+}
+
+.kbd-key {
+    display: table-cell;
+    float: left;
+    border: 2px solid white;
+    border-radius: 3px;
+    width: 70px;
+    height: 70px;
+    vertical-align: middle;
+    text-align: center;
+    margin: 5px;
+    line-height: 70px;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+.kbd-key-lang-switch {
+    width: 150px;
+}
+
+.kbd-key-space {
+    width: 630px;
+}
+
+.kbd-key-ok {
+    width: 150px;
+}
+
+.kbd-key-shift {
+    width: 150px;
+}
+
+.kbd-key:focus {
+    background-color: white;
+    color: midnightblue;
+    border: 2px solid white;
+}
+
+.kbd-key:hover {
+    background-color: white;
+    color: midnightblue;
+    border: 2px solid white;
+    cursor: default;
+}

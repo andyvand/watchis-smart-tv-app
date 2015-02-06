@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.samsung.com/">
+  <widgetname itemtype="string">Watch.is</widgetname>
+  <ver itemtype="string">0.100</ver>
+  <category itemtype="string">Videos</category>
+  <type itemtype="string">user</type>
+  <cpname itemtype="string"/>
+  <cplogo itemtype="string"/>
+  <cpauthjs itemtype="string"/>
+  <mgrver itemtype="string"/>
+  <movie>y</movie>
+  <fullwidget itemtype="boolean">y</fullwidget>
+  <srcctl itemtype="boolean">y</srcctl>
+  <ticker itemtype="boolean">n</ticker>
+  <childlock itemtype="boolean">n</childlock>
+  <videomute itemtype="boolean">n</videomute>
+  <audiomute itemtype="boolean">n</audiomute>
+  <dcont itemtype="boolean">y</dcont>
+  <ThumbIcon itemtype="string">res/106x87.png</ThumbIcon>
+  <BigThumbIcon itemtype="string">res/115x95.png</BigThumbIcon>
+  <ListIcon itemtype="string">res/86x70.png</ListIcon>
+  <BigListIcon itemtype="string">res/95x78.png</BigListIcon>
+  <description itemtype="string">Watch.is watcher</description>
+  <width itemtype="string">1280</width>
+  <height itemtype="string">720</height>
+  <autoUpdate itemtype="boolean">n</autoUpdate>
+  <mouse itemtype="boolean">y</mouse>
+  <author>
+    <name itemtype="string">Thoice</name>
+    <email itemtype="string">thoice@gmail.com</email>
+    <link itemtype="string">http://thoice.com</link>
+    <organization itemtype="string"/>
+  </author>
+</widget>
